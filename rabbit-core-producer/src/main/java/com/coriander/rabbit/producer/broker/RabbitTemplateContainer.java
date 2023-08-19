@@ -9,6 +9,7 @@ import com.coriander.rabbit.common.convert.RabbitMessageConverter;
 import com.coriander.rabbit.common.serializer.Serializer;
 import com.coriander.rabbit.common.serializer.SerializerFactory;
 import com.coriander.rabbit.common.serializer.impl.JacksonSerializerFactory;
+import com.coriander.rabbit.producer.service.BrokerMessageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.stream.Collectors;
 
 /**
@@ -39,6 +41,8 @@ public class RabbitTemplateContainer implements RabbitTemplate.ConfirmCallback {
 
     private SerializerFactory serializerFactory = JacksonSerializerFactory.INSTANCE;
 
+    @Autowired
+    private BrokerMessageService brokerMessageService;
     @Autowired
     private ConnectionFactory connectionFactory;
 
@@ -89,6 +93,11 @@ public class RabbitTemplateContainer implements RabbitTemplate.ConfirmCallback {
 
         if (ack) {
             // 当Broker 返回ACK成功时, 就是更新一下日志表里对应的消息发送状态为 SEND_OK
+
+            // 	如果当前消息类型为reliant 我们就去数据库查找并进行更新
+            if (MessageType.RELIANT.endsWith(messageType)) {
+                brokerMessageService.success(messageId);
+            }
 
             log.info("send message is OK, confirm messageId: {}, sendTime: {}", messageId, sendTime);
         } else {
