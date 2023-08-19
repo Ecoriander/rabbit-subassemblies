@@ -1,9 +1,11 @@
 package com.coriander.rabbit.api;
+
 /**
- * $MessageListener 
+ * $MessageListener 消费者监听消息
  *
- * @author coriander 
- * 
+ * @author coriander
  */
-public class MessageListener {
+public interface MessageListener {
+
+    void onMessage(Message message);
 }

@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.coriander.rabbitmq</groupId>
+        <groupId>com.coriander.rabbit</groupId>
         <artifactId>rabbit-subassemblies</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
@@ -10,8 +10,7 @@
     <artifactId>rabbit-core-producer</artifactId>
     <packaging>jar</packaging>
 
-    <name>rabbiq-core-producer</name>
-    <url>http://maven.apache.org</url>
+    <name>rabbit-core-producer</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,10 +18,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
+            <groupId>com.coriander.rabbit</groupId>
+            <artifactId>rabbit-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

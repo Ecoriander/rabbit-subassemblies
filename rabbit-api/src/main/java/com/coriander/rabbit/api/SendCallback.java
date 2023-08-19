@@ -1,9 +1,12 @@
 package com.coriander.rabbit.api;
+
 /**
- * $SendCallback 
+ * $SendCallback 回调函数预处理
  *
- * @author coriander 
- * 
+ * @author coriander
  */
-public class SendCallback {
+public interface SendCallback {
+    void onSuccess();
+
+    void onFailure();
 }

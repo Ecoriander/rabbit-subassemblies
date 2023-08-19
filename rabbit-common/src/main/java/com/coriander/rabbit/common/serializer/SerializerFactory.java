@@ -1,9 +1,11 @@
 package com.coriander.rabbit.common.serializer;
+
 /**
- * $SerializerFactory 
+ * $SerializerFactory
  *
- * @author coriander 
- * 
+ * @author coriander
  */
 public interface SerializerFactory {
+
+    Serializer create();
 }
