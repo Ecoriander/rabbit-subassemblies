@@ -31,7 +31,7 @@ public class RabbitProducerDataSourceConfiguration {
     @ConfigurationProperties(prefix = "rabbit.producer.druid.jdbc")
     public DataSource rabbitProducerDataSource() throws SQLException {
         DataSource rabbitProducerDataSource = DataSourceBuilder.create().type(dataSourceType).build();
-        log.info("============= rabbitProducerDataSource : {} ================", rabbitProducerDataSource);
+        log.info("============= rabbitProducerDataSource ================");
         return rabbitProducerDataSource;
     }
 

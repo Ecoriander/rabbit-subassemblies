@@ -20,6 +20,7 @@
         <module>rabbit-api</module>
         <module>rabbit-common</module>
         <module>rabbit-core-producer</module>
+        <module>rabbit-task</module>
     </modules>
 
     <properties>
