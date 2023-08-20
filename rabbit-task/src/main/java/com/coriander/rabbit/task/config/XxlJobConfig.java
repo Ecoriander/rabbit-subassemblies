@@ -3,6 +3,7 @@ package com.coriander.rabbit.task.config;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,6 +14,8 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @Slf4j
+/*当配置文件中存在xxl.job.admin.addresses 和 xxl.job.executor.appname 时,才会加载该对象*/
+@ConditionalOnProperty(prefix = "xxl.job", name = {"admin.addresses", "executor.appname"})
 public class XxlJobConfig {
     @Value("${xxl.job.admin.addresses}")
     private String adminAddresses;
