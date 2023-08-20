@@ -29,7 +29,7 @@ public class BrokerMessageConfiguration {
 
     @Bean
     public DataSourceInitializer initDataSourceInitializer() {
-        System.err.println("--------------rabbitProducerDataSource-----------:" + rabbitProducerDataSource);
+        System.err.println("--------------rabbitProducerDataSource-----------");
         final DataSourceInitializer initializer = new DataSourceInitializer();
         initializer.setDataSource(rabbitProducerDataSource);
         initializer.setDatabasePopulator(databasePopulator());
