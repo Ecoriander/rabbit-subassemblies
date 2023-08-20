@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * $BrokerMessageServiceImpl
@@ -38,5 +39,15 @@ public class BrokerMessageServiceImpl implements BrokerMessageService {
     @Override
     public void failure(String messageId) {
         brokerMessageMapper.changeBrokerMessageStatus(messageId, BrokerMessageStatus.SEND_FAIL.getCode(), new Date());
+    }
+
+    @Override
+    public List<BrokerMessage> listTimeOutMessage4Retry(BrokerMessageStatus brokerMessageStatus) {
+        return brokerMessageMapper.queryBrokerMessageStatus4Timeout(brokerMessageStatus.getCode());
+    }
+
+    @Override
+    public int updateTryCount(String brokerMessageId) {
+        return brokerMessageMapper.update4TryCount(brokerMessageId, new Date());
     }
 }

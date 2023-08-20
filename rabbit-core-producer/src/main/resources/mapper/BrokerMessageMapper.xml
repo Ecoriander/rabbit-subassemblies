@@ -140,4 +140,20 @@
             bm.update_time = #{updateTime, jdbcType=TIMESTAMP}
         where bm.message_id = #{brokerMessageId,jdbcType=VARCHAR}
     </update>
+
+    <select id="queryBrokerMessageStatus4Timeout" resultMap="BaseResultMap">
+        <![CDATA[
+        select message_id, message, try_count, status, next_retry, create_time, update_time
+        from broker_message bm
+        where bm.status = #{brokerMessageStatus,jdbcType=VARCHAR}
+          and bm.next_retry < sysdate()
+        ]]>
+    </select>
+
+    <update id="update4TryCount">
+        update broker_message bm
+        set bm.try_count = bm.try_count + 1,
+        bm.update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where bm.message_id = #{brokerMessageId,jdbcType=VARCHAR}
+    </update>
 </mapper>

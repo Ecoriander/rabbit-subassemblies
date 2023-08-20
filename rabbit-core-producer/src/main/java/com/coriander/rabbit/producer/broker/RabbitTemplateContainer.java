@@ -93,7 +93,6 @@ public class RabbitTemplateContainer implements RabbitTemplate.ConfirmCallback {
 
         if (ack) {
             // 当Broker 返回ACK成功时, 就是更新一下日志表里对应的消息发送状态为 SEND_OK
-
             // 	如果当前消息类型为reliant 我们就去数据库查找并进行更新
             if (MessageType.RELIANT.endsWith(messageType)) {
                 brokerMessageService.success(messageId);
